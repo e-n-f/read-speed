@@ -11,7 +11,8 @@ So far:
      129 MB/sec: USB 3.0 (Seagate 4TB Extra Storage, Linux)
      163 MB/sec: SATA (Seagate internal 1TB, Linux)
      260 MB/sec: Storm on Demand SSD (Linux)
-     485 MB/sec: MacBook Air SSD
+     485 MB/sec: MacBook Air (2013, 13") SSD
+    1267 MB/sec: MacBook Pro (2017, 13") SSD
     5600 MB/sec: Linux buffer cache (4400 MB/sec if accessed less recently?)
 
 By MB I mean 1048576 bytes, not 1000000.
