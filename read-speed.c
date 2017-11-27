@@ -8,6 +8,7 @@
 
 #define SIZE (100 * 1024 * 1024)
 #define INCREMENT (100 * 1024 * 1024)
+#define MAX (16 * 1024LL * 1024 * 1024)
 
 void output(struct timeval begin, long long bytes) {
 	struct timeval now;
@@ -30,7 +31,8 @@ int main() {
 
 	gettimeofday(&begin, NULL);
 
-	while (fgets(s, 50000, stdin)) {
+	int done = 0;
+	while (!done && fgets(s, 50000, stdin)) {
 		char *cp = strchr(s, '\n');
 		if (cp != NULL) {
 			*cp = '\0';
@@ -43,12 +45,17 @@ int main() {
 		}
 
 		ssize_t i;
-		while ((i = read(fd, buf, SIZE)) > 0) {
+		while (!done && (i = read(fd, buf, SIZE)) > 0) {
 			bytes += i;
 
 			if (bytes > obytes + INCREMENT) {
 				output(begin, bytes);
 				obytes = bytes;
+			}
+
+			if (bytes > MAX) {
+				done = 1;
+				break;
 			}
 		}
 		if (i < 0) {
